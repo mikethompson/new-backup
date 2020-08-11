@@ -1,2 +1,7 @@
+#each machine needs to have the NFS volume mounted to
+#/mnt/dlink_nfs/
+#each machine needs to have rsync installed and the script linked in crontab
+
+
 DIRNAME=$(hostname)
 rsync -va --delete --exclude-from=exclude.lst --delete-excluded --delete-before /home/ /mnt/dlink_nfs/backup-test/$DIRNAME

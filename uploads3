@@ -23,13 +23,13 @@ shopt -s dotglob
 shopt -s nullglob
 array=(*/)
 echo runing s3
-s3_cmd="sync -rHv --no-check-md5 --skip-existing --acl-private --continue-put --storage-class=STANDARD_IA --delete-removed --exclude-from=/mnt/dlink_nfs/backup-script/s3_exclude"
+s3_cmd="sync -rHv --no-check-md5 --delete-removed --skip-existing --acl-private --continue-put --storage-class=STANDARD_IA  --exclude-from=/mnt/dlink_nfs/backup-script/s3_exclude"
 s3_bucket=s3://linux-bck/backup/
 
 for dir in "${array[@]}"
 	 do 
 		echo "Currently Running S3 on $dir"
 		dir=${dir%/}
-echo		"s3cmd $s3_cmd $dir $s3_bucket"
+		s3cmd $s3_cmd $dir $s3_bucket
 	 done
 fi
