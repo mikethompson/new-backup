@@ -1,0 +1,2 @@
+DIRNAME=$(hostname)
+rsync -va --delete --exclude-from=exclude.lst --delete-excluded --delete-before /home/ /mnt/dlink_nfs/backup-test/$DIRNAME

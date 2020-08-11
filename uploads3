@@ -1,0 +1,35 @@
+#!/bin/bash
+#set -x
+script_name=$(basename -- "$0")
+
+if pidof -x "$script_name" -o $$ >/dev/null;then
+   echo "An another instance of this script is already running"
+   exit 1
+fi
+echo $1
+
+if [[ $1 == 'clean' ]]
+ then
+echo "clean command passed"
+exit 1
+else
+#This file works in conjunction with backup-rsync 
+#it copies files from the NFS share to Amazon S3
+rsync -vruO --delete-before /mnt/dlink_nfs/backup-test /mnt/samba/backup-test
+#echo rsync complete
+cd /mnt/dlink_nfs/backup-test/
+#echo entered dir
+shopt -s dotglob
+shopt -s nullglob
+array=(*/)
+echo runing s3
+s3_cmd="sync -rHv --no-check-md5 --skip-existing --acl-private --continue-put --storage-class=STANDARD_IA --delete-removed --exclude-from=/mnt/dlink_nfs/backup-script/s3_exclude"
+s3_bucket=s3://linux-bck/backup/
+
+for dir in "${array[@]}"
+	 do 
+		echo "Currently Running S3 on $dir"
+		dir=${dir%/}
+echo		"s3cmd $s3_cmd $dir $s3_bucket"
+	 done
+fi
