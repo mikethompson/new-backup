@@ -1,6 +1,14 @@
 pi/.cache
-pi/.config
+.config
 pi/.local
 pi/.cpan
 .git
+.bash_history
+.cache
+.dropbox-dist
+.local
+.mozilla
+Dropbox
+.dropbox
+.thunderbird
 
