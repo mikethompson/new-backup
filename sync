@@ -1,0 +1,20 @@
+#!/bin/bash
+#set -x
+script_name=$(basename -- "$0")
+
+if pidof -x "$script_name" -o $$ >/dev/null;then
+   echo "An another instance of this script is already running"
+   exit 1
+fi
+echo $1
+
+if [[ $1 == 'clean' ]]
+ then
+echo "clean command passed"
+exit 1
+else
+#This file works in conjunction with backup-rsync 
+#it copies files from the NFS share to Samba share
+rsync -vruO /mnt/dlink_nfs/backup-test /mnt/samba/
+#echo rsync complete
+fi

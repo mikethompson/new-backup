@@ -15,7 +15,7 @@ exit 1
 else
 #This file works in conjunction with backup-rsync 
 #it copies files from the NFS share to Amazon S3
-rsync -vruO --delete-after /mnt/dlink_nfs/backup-test /mnt/samba/backup-test
+rsync -vruO --delete-after /mnt/dlink_nfs/backup-test /mnt/samba/
 #echo rsync complete
 cd /mnt/dlink_nfs/backup-test/
 #echo entered dir
