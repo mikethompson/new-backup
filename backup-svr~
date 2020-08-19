@@ -6,6 +6,7 @@
 #exclude file will exclude from all machines unless specified otherwise relative path to the source
 
 FOLDER=/mnt/dlink_nfs
+
 DIRNAME=$(hostname)
 
 if [[ $1 == 'clean' ]]
