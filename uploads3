@@ -27,6 +27,6 @@ if [[ $1 == 'clean' ]]
 	 do 
 		echo "Currently Running S3 on $dir"
 		dir=${dir%/}
-		s3cmd $s3_cmd $dir $s3_bucket
+		timeout 5h s3cmd $s3_cmd $dir $s3_bucket
 	 done
 fi

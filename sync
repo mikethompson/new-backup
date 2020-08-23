@@ -10,7 +10,7 @@ if pidof -x "$script_name" -o $$ >/dev/null;then
 fi
 echo $1
 
-rsync -vruO /mnt/dlink_nfs/backup-test /mnt/samba/
+rsync -vruO --delete-after /mnt/dlink_nfs/backup-test /mnt/samba/
 
 
 #if [[ $1 == 'clean' ]]
