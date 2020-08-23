@@ -1,8 +1,6 @@
 #!/bin/bash
-#set -x
-script_name=$(basename -- "$0")
-s3_cmd="sync -rHv --no-check-md5 --delete-removed --skip-existing --acl-private --continue-put --storage-class=STANDARD_IA  --exclude-from=/mnt/dlink_nfs/backup-script/s3_exclude"
-s3_bucket=s3://linux-bck/backup/
+
+source /mnt/dlink_nfs/backup-script/var-dec
 
 if pidof -x "$script_name" -o $$ >/dev/null;then
    echo "An another instance of this script is already running"
@@ -14,9 +12,9 @@ if [[ $1 == 'clean' ]]
 		echo "clean command passed"
 		exit 1
 	else
-		rsync -vruO --delete-after /mnt/dlink_nfs/backup-test /mnt/samba/
+		rsync -vruO --delete-after $FOLDER_NFS/backup-test /mnt/samba/
 
-	cd /mnt/dlink_nfs/backup-test/
+	cd $FOLDER_NFS/backup-test/
 
 	shopt -s dotglob
 	shopt -s nullglob
