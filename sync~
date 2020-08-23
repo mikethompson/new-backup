@@ -1,5 +1,7 @@
 #!/bin/bash
-#set -x
+#This file syncs the two network drives together
+
+
 script_name=$(basename -- "$0")
 
 if pidof -x "$script_name" -o $$ >/dev/null;then
@@ -8,13 +10,13 @@ if pidof -x "$script_name" -o $$ >/dev/null;then
 fi
 echo $1
 
-if [[ $1 == 'clean' ]]
- then
-echo "clean command passed"
-exit 1
-else
-#This file works in conjunction with backup-rsync 
-#it copies files from the NFS share to Samba share
-rsync -vruO /mnt/dlink_nfs/backup-test /mnt/samba/
-#echo rsync complete
-fi
+rsync -vruO --delete-after /mnt/dlink_nfs/backup-test /mnt/samba/
+
+
+#if [[ $1 == 'clean' ]]
+# then
+#echo "clean command passed"
+#exit 1
+#else
+#rsync -vruO /mnt/dlink_nfs/backup-test /mnt/samba/
+#fi

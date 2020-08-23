@@ -1,22 +1,11 @@
 #!/bin/bash
 #This file syncs the two network drives together
 
-
-script_name=$(basename -- "$0")
+source /mnt/dlink_nfs/backup-script/var-dec
 
 if pidof -x "$script_name" -o $$ >/dev/null;then
    echo "An another instance of this script is already running"
    exit 1
 fi
-echo $1
 
-rsync -vruO --delete-after /mnt/dlink_nfs/backup-test /mnt/samba/
-
-
-#if [[ $1 == 'clean' ]]
-# then
-#echo "clean command passed"
-#exit 1
-#else
-#rsync -vruO /mnt/dlink_nfs/backup-test /mnt/samba/
-#fi
+rsync -vruO --delete-after $FOLDER_NFS/backup-test /mnt/samba/
