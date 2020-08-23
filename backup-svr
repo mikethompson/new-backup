@@ -7,6 +7,7 @@
 
 FOLDER=/mnt/dlink_nfs
 DIRNAME=$(hostname)
+source /mnt/dlink_nfs/backup-script/var-dec
 
 if [[ $1 == 'clean' ]]
 	then
