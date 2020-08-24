@@ -1,0 +1,7 @@
+#!/bin/bash
+#VARIABLE DECLARATIONS
+
+test="TRUE"
+
+FOLDER_NFS=/mnt/dlink_nfs
+DIRNAME=$(hostname)
