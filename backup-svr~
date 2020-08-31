@@ -6,17 +6,4 @@
 #exclude file will exclude from all machines unless specified otherwise relative path to the source
 source /mnt/dlink_nfs/backup-script/var-dec
 
-echo $test
-
-FOLDER=/mnt/dlink_nfs
-DIRNAME=$(hostname)
-source /mnt/dlink_nfs/backup-script/var-dec
-
-if [[ $1 == 'clean' ]]
-	then
-	echo "clean command passed"
-	rsync -va --delete-after --exclude-from=$FOLDER/backup-script/exclude.lst /home/$USER $FOLDER/backup-test/$DIRNAME
-	exit 1
-	else
-	rsync -va --exclude-from=$FOLDER/backup-script/exclude.lst --delete-excluded /home/$USER $FOLDER/backup-test/$DIRNAME
-fi
+rsync -va --delete-after --exclude-from=$FOLDER_NFS/backup-script/exclude.lst /home/$USER $FOLDER_NFS/backup-test/$DIRNAME

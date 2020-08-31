@@ -1,43 +1,16 @@
-pi/.cache
-.config
-pi/.local
-pi/.cpan
-.git
-.bash_history
-.cache
-.dropbox-dist
-.local
-.mozilla
-Dropbox
-.dropbox
-.thunderbird
-*/Backup/*
-*/.config/
-*/.local/share/Trash/
-*/.cache/
-*/.dropbox/
-*/.dropbox-dist/
-*/.thunderbird/
-*/Dropbox/
-*/.mozilla/
-*/.cache/*
-/home/michael/Backup
-*/.local/
-*/Script/.git
-*/.git
-*/.gnome2*
-*/william/Pictures/Michaels Pictures/*
-.bash_history
-.Trash-1000
-*/VirtualBox*/*
-*/.ICEauthority
-*/.gconf/apps/aisleriot/*
-*/.ssh/*
-*/.vnc/*
-*/.themes/*
-*/.pki/*
-*/.gnupg/*
-*/.nano/*
-*/python_games/*
-*/.cpan/*
-dead.letter
+# new-backup
+
+TESTING BRANCH....
+
+
+New backup system
+REQUIRES
+Amazon S3 account 
+s3cmd installed and configured
+Network drives of some description
+
+set each machine on the network to mount in fstab the NFS mount
+Set CRON to run the backup-svr file located in the backup-script dir
+change any paths you may need for the target.
+
+Change any required variables in var-dec file.
