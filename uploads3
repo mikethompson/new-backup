@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source /mnt/dlink_nfs/backup-script/var-dec
-echo "Script Started: $(date)" >> $FOLDER_NFS/$FOLDER_NFS/uploads3.log
+echo "Script Started: $(date)" >> $FOLDER_NFS/uploads3.log
 
 if pidof -x "$script_name" -o $$ >/dev/null;then
    echo "An another instance of this script is already running"
