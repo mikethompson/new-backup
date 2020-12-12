@@ -11,7 +11,6 @@ fi
 DOW=$(date +"%a")
 
 if [ "$DOW" == "Sat" ]; then
-echo Saturday.
 rsync -avbh --delete-before $FOLDER_NFS/$FOLDER  /mnt/synology2
 rsync -avbh --delete-before $FOLDER_NFS/backup-script /mnt/synology2/backup-script
 rsync -rtDpovbhz --delete-before $FOLDER_NFS_SYN2/$FOLDER /mnt/synology1
@@ -19,5 +18,4 @@ else
 rsync -avbh $FOLDER_NFS/$FOLDER  /mnt/synology2
 rsync -avbh $FOLDER_NFS/backup-script /mnt/synology2/backup-script
 rsync -rtDpovbhz $FOLDER_NFS_SYN2/$FOLDER /mnt/synology1
-echo no clean
 fi
