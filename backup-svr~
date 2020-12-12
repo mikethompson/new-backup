@@ -7,9 +7,21 @@
 source /mnt/dlink_nfs/backup-script/var-dec
 echo "--------------" >> $FOLDER_NFS/"backup-$(hostname).log"
 echo "Starting backup on $(hostname) $(date) User is: $(logname)"
-echo "Backup on $(hostname) >> $FOLDER_NFS/"backup-$(hostname).log"
-echo "$(date)" >> $FOLDER_NFS/"backup-$(hostname).log
+echo "Backup on $(hostname)" >> $FOLDER_NFS/"backup-$(hostname).log"
+echo "$(date)" >> $FOLDER_NFS/"backup-$(hostname).log"
 echo "User: $(logname)" >> $FOLDER_NFS/"backup-$(hostname).log"
-rsync -va --delete-after --delete-excluded --exclude-from=$FOLDER_NFS/backup-script/exclude.lst /home/$USER $FOLDER_NFS/backup-test/$DIRNAME >> $FOLDER_NFS/"backup-$(hostname).log"
+rsync -a --exclude-from=$FOLDER_NFS/backup-script/exclude.lst /home/$USER $FOLDER_NFS/$FOLDER/$DIRNAME #>> $FOLDER_NFS/"backup-$(hostname).log"
 echo "Completed backup $(date)" >> $FOLDER_NFS/"backup-$(hostname).log"
 echo "Completed backup $(date)"
+#rsync -va /home/$USER USER@IPADDR::FOLDER/FOLDER/ 
+
+
+DOW=$(date +"%a")
+#echo $DOW
+
+if [ "$DOW" == "Sat" ]; then
+echo Saturday.
+#rsync -a --delete-before --exclude-from=$FOLDER_NFS/backup-script/exclude.lst /home/$USER $FOLDER_NFS/$FOLDER/$DIRNAME
+else
+echo not sat
+fi

@@ -3,7 +3,10 @@
 
 test="TRUE"
 
+FOLDER=backup-test
 FOLDER_NFS=/mnt/dlink_nfs
+FOLDER_NFS_SYN2=/mnt/synology2
+FOLDER_NFS_SYN1=/mnt/synology1
 DIRNAME=$(hostname)
 #This is used to ensure only one instance of the calling script is running
 script_name=$(basename -- "$0")

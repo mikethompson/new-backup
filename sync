@@ -1,5 +1,5 @@
 #!/bin/bash
-#This file syncs the two network drives together
+#This file syncs the network drives together
 
 source /mnt/dlink_nfs/backup-script/var-dec
 
@@ -8,4 +8,16 @@ if pidof -x "$script_name" -o $$ >/dev/null;then
    exit 1
 fi
 
-rsync -vruO --delete-after $FOLDER_NFS/backup-test /mnt/samba/
+DOW=$(date +"%a")
+
+if [ "$DOW" == "Sat" ]; then
+echo Saturday.
+rsync -avbh --delete-before $FOLDER_NFS/$FOLDER  /mnt/synology2
+rsync -avbh --delete-before $FOLDER_NFS/backup-script /mnt/synology2/backup-script
+rsync -rtDpovbhz --delete-before $FOLDER_NFS_SYN2/$FOLDER /mnt/synology1
+else
+rsync -avbh $FOLDER_NFS/$FOLDER  /mnt/synology2
+rsync -avbh $FOLDER_NFS/backup-script /mnt/synology2/backup-script
+rsync -rtDpovbhz $FOLDER_NFS_SYN2/$FOLDER /mnt/synology1
+echo no clean
+fi

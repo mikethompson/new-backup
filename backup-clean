@@ -1,0 +1,22 @@
+#!/bin/bash
+
+#each machine needs to have the NFS volume mounted to
+#/mnt/dlink_nfs/
+#each machine needs to have rsync installed and the script linked in crontab
+#exclude file will exclude from all machines unless specified otherwise relative path to the source
+
+source /mnt/dlink_nfs/backup-script/var-dec
+echo "--------------" #>> $FOLDER_NFS/"backup-$(hostname).log"
+echo "Starting backup and clean on $(hostname) $(date) User is: $(logname)"
+echo "Backup and clean on $(hostname)" #>> $FOLDER_NFS/"backup-$(hostname).log"
+echo "$(date)" #>> $FOLDER_NFS/"backup-$(hostname).log"
+echo "User: $(logname)" #>> $FOLDER_NFS/"backup-$(hostname).log"
+rsync -mzruv --delete-excluded --delete-before --exclude-from=$FOLDER_NFS/backup-script/exclude.lst /home/$USER $FOLDER_NFS/backup-test/$DIRNAME #>> $FOLDER_NFS/"backup-$(hostname).log"
+echo "Completed backup and clean $(date)" # >> $FOLDER_NFS/"backup-$(hostname).log"
+echo "Completed backup and clean $(date)"
+DOW=$(date +"%a")
+echo $DOW
+
+if [ "$DOW" == "Sat" ]; then
+echo Saturday.
+fi
