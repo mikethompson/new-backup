@@ -11,11 +11,14 @@ fi
 DOW=$(date +"%a")
 
 if [ "$DOW" == "Sat" ]; then
-rsync -avbh --delete-before $FOLDER_NFS/$FOLDER  /mnt/synology2
-rsync -avbh --delete-before $FOLDER_NFS/backup-script /mnt/synology2/backup-script
-rsync -rtDpovbhz --delete-before $FOLDER_NFS_SYN2/$FOLDER /mnt/synology1
+#rsync -rtDvmhz --delete-before $FOLDER_NFS/$FOLDER  /mnt/synology2
+#echo rsync -avh --delete-before --exclude-from=$FOLDER_NFS/backup-script/exclude.lst $FOLDER_NFS/backup-script/ /mnt/synology2/backup-script
+#rsync -rtDvmhz --delete-before --exclude-from=$FOLDER_NFS/backup-script/exclude.lst $FOLDER_NFS/backup-script/ /mnt/synology2/backup-script
+rsync -rtDvhmz --exclude '#recycle' $FOLDER_NFS/$FOLDER/ /mnt/synology1
 else
-rsync -avbh $FOLDER_NFS/$FOLDER  /mnt/synology2
-rsync -avbh $FOLDER_NFS/backup-script /mnt/synology2/backup-script
-rsync -rtDpovbhz $FOLDER_NFS_SYN2/$FOLDER /mnt/synology1
+#echo rsync -rtDvmhz $FOLDER_NFS/$FOLDER  /mnt/synology2
+#echo rsync -rtDvmhz $FOLDER_NFS/backup-script/ /mnt/synology2/backup-script
+rsync -rtDvbhmz --exclude '#recycle' $FOLDER_NFS/$FOLDER/ /mnt/synology1/$FOLDER
 fi
+
+#tar -cvf /mnt/synology1/old_data.tar /mnt/synology1/backup-test

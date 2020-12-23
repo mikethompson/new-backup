@@ -3,5 +3,14 @@
 
 test="TRUE"
 
+FOLDER=backup-test
 FOLDER_NFS=/mnt/dlink_nfs
+FOLDER_NFS_SYN2=/mnt/synology2
+FOLDER_NFS_SYN1=/mnt/synology1
+FOLDER_NFS_UPLOAD==/mnt/synology1
+
 DIRNAME=$(hostname)
+#This is used to ensure only one instance of the calling script is running
+script_name=$(basename -- "$0")
+s3_cmd="sync -rHv --no-check-md5 --delete-removed --skip-existing --acl-private --continue-put --storage-class=STANDARD_IA  --exclude-from=/mnt/dlink_nfs/backup-script/s3_exclude"
+s3_bucket=s3://linux-bck/backup/

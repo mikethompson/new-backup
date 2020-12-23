@@ -13,9 +13,9 @@ echo "$(date)" >> $FOLDER_NFS/"backup-$(hostname).log"
 echo "User: $(logname)" >> $FOLDER_NFS/"backup-$(hostname).log"
 
 if [ "$DOW" == "Sat" ]; then
-rsync -a --delete-before --exclude-from=$FOLDER_NFS/backup-script/exclude.lst /home/$USER $FOLDER_NFS/$FOLDER/$DIRNAME #>> $FOLDER_NFS/"backup-$(hostname).log"
+rsync -rtDvmhz --delete-before --exclude-from=$FOLDER_NFS/backup-script/exclude.lst /home/$USER $FOLDER_NFS/$FOLDER/$DIRNAME #>> $FOLDER_NFS/"backup-$(hostname).log"
 else
-rsync -a --exclude-from=$FOLDER_NFS/backup-script/exclude.lst /home/$USER $FOLDER_NFS/$FOLDER/$DIRNAME #>> $FOLDER_NFS/"backup-$(hostname).log"
+rsync -rtDvmhz --delete-before --exclude-from=$FOLDER_NFS/backup-script/exclude.lst /home/$USER $FOLDER_NFS/$FOLDER/$DIRNAME #>> $FOLDER_NFS/"backup-$(hostname).log"
 fi
 
 echo "Completed backup $(date)" >> $FOLDER_NFS/"backup-$(hostname).log"

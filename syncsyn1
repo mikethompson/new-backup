@@ -1,0 +1,12 @@
+#!/bin/bash
+#This file Cleans the Syn1 Store
+
+source /mnt/dlink_nfs/backup-script/var-dec
+
+if pidof -x "$script_name" -o $$ >/dev/null;then
+   echo "An another instance of this script is already running"
+   exit 1
+fi
+
+rsync -rtDvhmz --delete-before $FOLDER_NFS_SYN2/$FOLDER/ /mnt/synology1
+
