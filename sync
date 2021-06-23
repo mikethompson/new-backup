@@ -8,13 +8,34 @@ if pidof -x "$script_name" -o $$ >/dev/null;then
    exit 1
 fi
 
+if [ "$1" == "new" ]; then
+
+var=$(date +"%FORMAT_STRING")
+now=$(date +"%m_%d_%Y")
+today=$(date +"%Y-%m-%d")
+cd $FOLDER_NFS/$FOLDER/
+
+	shopt -s dotglob
+	shopt -s nullglob
+	array=(*/)
+	echo runing s3
+
+	for dir in "${array[@]}"
+	 do 
+		dir=${dir%/}
+		filename="${dir}_${today}.tar.bz2"
+	  tar -cjvf "/mnt/synology1/tar/$filename" /mnt/synology1/backup-test/$dir
+	 done
+exit 1
+fi
+
 DOW=$(date +"%a")
 
 if [ "$DOW" == "Sat" ]; then
 #rsync -rtDvmhz --delete-before $FOLDER_NFS/$FOLDER  /mnt/synology2
 #echo rsync -avh --delete-before --exclude-from=$FOLDER_NFS/backup-script/exclude.lst $FOLDER_NFS/backup-script/ /mnt/synology2/backup-script
 #rsync -rtDvmhz --delete-before --exclude-from=$FOLDER_NFS/backup-script/exclude.lst $FOLDER_NFS/backup-script/ /mnt/synology2/backup-script
-rsync -rtDvhmz --exclude '#recycle' $FOLDER_NFS/$FOLDER/ /mnt/synology1
+rsync -rtDvhmz --delete-before --exclude '#recycle' $FOLDER_NFS/$FOLDER/ /mnt/synology1/$FOLDER
 else
 #echo rsync -rtDvmhz $FOLDER_NFS/$FOLDER  /mnt/synology2
 #echo rsync -rtDvmhz $FOLDER_NFS/backup-script/ /mnt/synology2/backup-script

@@ -10,7 +10,7 @@ echo "-----------------------"
    exit 1
 fi
 
-cd $FOLDER_NFS/$FOLDER/
+	cd $FOLDER_NFS_UPLOAD/$FOLDER/
 echo "Starting S3 uploads" >> $FOLDER_NFS/uploads3.log
 	shopt -s dotglob
 	shopt -s nullglob
@@ -21,7 +21,7 @@ echo "Starting S3 uploads" >> $FOLDER_NFS/uploads3.log
 	 do 
 		echo "Currently Running S3 on $dir" >> $FOLDER_NFS/uploads3.log
 		dir=${dir%/}
-	        timeout 20m s3cmd $s3_cmd $dir $s3_bucket
+	        timeout 120m s3cmd $s3_cmd $dir $s3_bucket
 		echo "Compleated uploading $dir" >> $FOLDER_NFS/uploads3.log
 
 	 done
